@@ -28,13 +28,13 @@ import javax.servlet.http.HttpServletRequest;
         Object password = session.getAttribute("password");
         return response;
 
-        if("Tom" == username) {
-            response.setViewName("/login/loginSubmit");
-        }
+//        if ("Tom" == username)
+            //need to check in Tom is in the session.
+
     }
 
         @RequestMapping(value ="/loginSubmit", method = RequestMethod.GET)
-public ModelAndView loginSubmit(HttpServletRequest request, ServletRequest session) throws Exception {
+        public ModelAndView loginSubmit(HttpServletRequest request, ServletRequest session) throws Exception {
             ModelAndView response = new ModelAndView();
             response.setViewName("login/loginSubmit");
 
