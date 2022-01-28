@@ -1,6 +1,5 @@
-
+<%--how to link css to html???--%>
 <html>
-
 <body>
 <h1>This is our first JSP page</h1>
 <h1>Login</h1>
@@ -11,6 +10,8 @@
     First Name <input type="text" name ="firstName">
     <br>
     <br>
+    Email <input type = "email" name = "email">
+    Birthday <input type ="date" name ="birthdate">
     Dropdown <select name ="dropdown">
     <option>Option 1</option>
     <option>Option 2</option>
@@ -20,7 +21,10 @@
 <button type ="submit">Submit</button>
 
 </form>
-<h1>Register</h1>
+</body>
+
+</html>
+<%--<h1>Register</h1>--%>
 <%--<form method ="get" action ="/indexSubmit" name = "Register">--%>
 <%--    Email <input type ="email" name ="email address">--%>
 <%--    <br>--%>
@@ -42,6 +46,3 @@
 
 <%--</form>--%>
 
-</body>
-
-</html>
