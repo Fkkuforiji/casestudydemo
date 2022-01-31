@@ -21,7 +21,7 @@ import javax.servlet.http.HttpServletRequest;
 //the C in MVC
     public class LoginController {
     @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public ModelAndView Login(HttpServletRequest request, ServletRequest session) throws Exception {
+    public ModelAndView login(HttpServletRequest request, ServletRequest session) throws Exception {
         ModelAndView response = new ModelAndView();
         response.setViewName("login/login");
         Object username = session.getAttribute("username");
@@ -41,14 +41,14 @@ import javax.servlet.http.HttpServletRequest;
             String username = request.getParameter("username");
             String password = request.getParameter("password");
 
-
+            response.addObject("username", username);
             if (username == "Tom" && password == "Jerry"){
                 session.setAttribute("username", username);
                 System.out.println("username is: " + username + "and the password is " +password);
-                response.setViewName("/login/loginSubmit");
+                response.setViewName("login/loginSubmit");
             } else {
                 System.out.println("Username is not correct!");
-                response.setViewName("/login/login");
+                response.setViewName("login/login");
             }
 
             return response;
