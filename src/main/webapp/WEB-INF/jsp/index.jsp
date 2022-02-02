@@ -1,8 +1,8 @@
 <%--how to link css to html???--%>
 <html>
 <body>
-<h1>This is our first JSP page</h1>
-<h1>Login</h1>
+<a href="login">Login</a>
+<h1>User Registration</h1>
 <form method ="GET" action="/indexSubmit">
     Username <input type="text" name ="username">
     <br>

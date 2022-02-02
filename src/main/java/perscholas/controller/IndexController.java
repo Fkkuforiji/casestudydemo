@@ -15,7 +15,7 @@ import javax.servlet.http.HttpSession;
 //the C in MVC
 public class IndexController {
     @RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
-    /* the / and /index are the web pages that we can view by including in our local
+    /* the / and /index are the assigned link names for the web pages that we can view by including in our local
     host url. ex. localhost:8080/ or localhost:8080/index*/
     public ModelAndView index(HttpServletRequest request, HttpSession session) throws Exception {
         //What is HTTPServlet request?
@@ -44,7 +44,8 @@ Object username = session.getAttribute("username");
     }
     @RequestMapping(value = "/indexSubmit", method = RequestMethod.GET)
     public ModelAndView indexSubmit(HttpServletRequest request, HttpSession session) throws Exception {
-/*indexSubmit is the String View name for the jsp file that will be viewed.
+/*/indexSubmit value is the url View name and is the methodID that connects the index.jsp page, to the indexSubmit jsp
+the Yellow indexSubmit can be anything
 Model is an object that stores values that need to be sent to the jsp file. Store in strings.
 HttpSession "session" sets a session variable name for the user in a current use session, where the functions done
 in a session are committed to memory for that specific session. Once the session is closed,
