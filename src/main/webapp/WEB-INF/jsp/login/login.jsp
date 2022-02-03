@@ -1,3 +1,4 @@
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <html>
 <body>
@@ -22,6 +23,7 @@
     <br>
     <br>
     <button type ="submit">Submit</button>
+<h4 style = "color: red">${errorMessage}</h4>
 </form>
 </body>
 </html>

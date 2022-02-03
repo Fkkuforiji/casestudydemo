@@ -8,7 +8,7 @@ the link is re-directed to the login page-->
 <br>
 You have successfully logged in!
 <br>
-Your username is ${usernameSessionKey} (session user name)<br>
+Your username is ${usernameSessionKey} (session username)<br>
 Logged In User is ${loggedinuser} (logged in name)<!--session.addObject in the loginController-->
 
 

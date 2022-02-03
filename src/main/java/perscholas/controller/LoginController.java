@@ -40,9 +40,19 @@ public class LoginController {
 //Test 5: login with tom and jerry which will be on the success page and /success in url
 //type/login in login and make sure you are redirected to /success and show the success page.
 
+
+//Exercise 2:
+
+//use setAttribute to set an error message in the session. In the loginSubmit method
+//getAttribute to get the error message from the session in the login method
+//response (model) .addObject to make the error message available to the JSP
+// alter the login.jsp to show the error message from the model using ${  } notation
     private static String SESSION_KEY = "usernameSessionKey";
     private static String SESSION_KEY2 = "passwordSessionKey";
     //class recording January 27th, 3:18:00
+    private static String SESSION_ERROR_MESSAGE = "errorMessageKey"; //01/26/2022 - 4:15:00
+
+
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public ModelAndView login(HttpServletRequest request, HttpSession session) throws Exception {
         ModelAndView response = new ModelAndView();
@@ -50,11 +60,17 @@ public class LoginController {
         String username = (String) session.getAttribute(SESSION_KEY);
         String password = (String) session.getAttribute(SESSION_KEY2);
 
+
         //We are checking if a string exists in the current session
         if (StringUtils.equals(username, "Tom")) {
             response.setViewName("redirect:/success");
         } else {
+            String errorMessage = (String)session.getAttribute(SESSION_ERROR_MESSAGE);
+            response.addObject("errorMessage", errorMessage);
+            //adding this object to the page to display
             response.setViewName("login/login");
+
+
         }
         return response;
 
@@ -64,12 +80,11 @@ public class LoginController {
     //is the value mapping what tells the login.jsp file what method to read? A bit confused on the
     //connection of the jsp. Why is the yellow text loginSubmit, but we route to success.jsp
     //is this just a naming convention?
-    public ModelAndView loginSubmit(HttpServletRequest request, HttpSession session, @RequestParam String username, @RequestParam String password) throws Exception {
-        //REQUESTPARAM is the best way to requestParameters in a method
+    public ModelAndView loginSubmit(HttpServletRequest request, HttpSession session) throws Exception {
+
         ModelAndView response = new ModelAndView();
-//      String username = request.getParameter("username");//this can also just be username, it says from ,so we know what we're taking from
-        //String password = request.getParameter("password");
-//^^ Using @RequestParam fulfills the need for the ^^ request.getParameter functions. I have both a username RequestParam and password RequestParam bc I need to request both.
+        String username = request.getParameter("username");//this is the username from the login form.
+        String password = request.getParameter("password");
         /* On GitHUB:
          * if (StringUtils.equals(username, "Tom") -- this is comparing the users input in the login page
          * to the if statement parameters. If the use inputs "Tom", then the input passes.*/
@@ -92,45 +107,91 @@ public class LoginController {
             //if the login is invalid
             session.setAttribute(SESSION_KEY, null);
             session.setAttribute(SESSION_KEY2, null);
-                /* we set the attribute to null if the incorrect username is entered so that
+
+             /* we set the attribute to null if the incorrect username is entered so that
                 the incorrect username is not saved within the session
                  */
             System.out.println("Username is not correct!");
             response.setViewName("redirect:/login"); //--displays login in the url instead of loginSubmit
             //response.setViewName("login/login") -- this routed to the loginSubmit method
             //which gave the view of the loginSubmit in the url, but showed the login page.
-        }
+             session.setAttribute(SESSION_ERROR_MESSAGE, "Invalid Login");
+         }
 
         return response;
             /*QUESTION: in the IndexSubmit method we needed to addObject but in this LoginSubmit method, we don't...it still displays in the
              success.jsp. Why do we need add object? Does it create permanence in the session?*/
     }
 
-    //LOGIN BEAN EXAMPLE
+
+        //LOGIN BEAN EXAMPLE - 01/26/20221 - 03:40:00
 //    @RequestMapping(value = "/loginSubmit2", method = RequestMethod.GET)
-//
-  //public ModelAndView LoginBean(HttpSession session, LoginBean form) throws Exception {
+////
+//        public ModelAndView LoginBean(HttpSession session, LoginBean form) throws Exception {
 //        ModelAndView response = new ModelAndView();
-      // you can also do:
+//        // you can also do:
 //    String username = form.getUsername();
-////    String password = form.getPassword();
-      //^^ This simply renames the form.get attribute and you can use username & password in place of the form.get attribute in the if statement
-//
-//        if (StringUtils.equals(form.getUsername(), "Tom") && StringUtils.equals(form.getPassword(), "Jerry")) {
-//            session.setAttribute(SESSION_KEY, form.getUsername());
-//            session.setAttribute(SESSION_KEY2, form.getPassword());
-//            System.out.println("The username is: " + form.getUsername() + " and the password is " + password);
+//    String password = form.getPassword();
+//        //^^ This simply renames the form.get attribute and you can use username & password in place of the form.get attribute in the if statement
+////
+//        if (StringUtils.equals(username, "Tom") && StringUtils.equals(password, "Jerry")) {
+//            session.setAttribute(SESSION_KEY, username);
+//            session.setAttribute(SESSION_KEY2, username);
+//            System.out.println("The username is: " + username + " and the password is " + password);
 //            response.setViewName("redirect:/success");
 //        } else {
-//            //if the login is invalid
+////            //if the login is invalid
 //            session.setAttribute(SESSION_KEY, null);
 //            session.setAttribute(SESSION_KEY2, null);
 //            System.out.println("Username is not correct!");
 //            response.setViewName("redirect:/login");
+//            session.setAttribute(SESSION_ERROR_MESSAGE, "Invalid Login");
 //        }
-//
+////
 //        return response;
 //           }
+//        RequestParam EXAMPLE - 01/26/2022 - 3:31:14 seconds
+//        @RequestMapping(value = "/loginSubmit", method = RequestMethod.GET)
+//        //is the value mapping what tells the login.jsp file what method to read? A bit confused on the
+//        //connection of the jsp. Why is the yellow text loginSubmit, but we route to success.jsp
+//        //is this just a naming convention?
+//        public ModelAndView loginSubmit(HttpServletRequest request, HttpSession session, @RequestParam String username, @RequestParam String password) throws Exception {
+//            //REQUESTPARAM is the best way to requestParameters in a method
+//            ModelAndView response = new ModelAndView();
+////      String username = request.getParameter("username");//this can also just be username, it says from ,so we know what we're taking from
+//            //String password = request.getParameter("password");
+////^^ Using @RequestParam fulfills the need for the ^^ request.getParameter functions. I have both a username RequestParam and password RequestParam bc I need to request both.
+//            /* On GitHUB:
+//             * if (StringUtils.equals(username, "Tom") -- this is comparing the users input in the login page
+//             * to the if statement parameters. If the use inputs "Tom", then the input passes.*/
+//            if (StringUtils.equals(username, "Tom") && StringUtils.equals(password, "Jerry")) {
+//                //if ("Tom".equals(username) && "Jerry".equals(password)) {
+//                //^^another method of checking if an input matching the string in the equals parameter,
+//                // both are valid and do the same thing!
+//                session.setAttribute(SESSION_KEY, username);
+//                session.setAttribute(SESSION_KEY2, password);
+//                //QUESTION: in gitHUB the set attribute was "usernameSessionKey, WHY? can this just be username?
+//                // ^^QUESTION: Why is this included?
+//                System.out.println("The username is: " + username + " and the password is " + password);
+//                response.setViewName("redirect:/success");
+//                //when using redirect, use the URL of the controller method that you want displayed./success is the url in the success method
+//                //when using the name of a view, we use the path to the name of the jsp folder ex. /login(folder)/login
+//                /*^^ this is checking to see if the username and password equal Tom
+//                 * and Jerry respectively. If both inputs are correct, then it goes to the
+//                 * loginSubmit page (success jps in Eric H. github*/
+//            } else {
+//                //if the login is invalid
+//                session.setAttribute(SESSION_KEY, null);
+//                session.setAttribute(SESSION_KEY2, null);
+//                /* we set the attribute to null if the incorrect username is entered so that
+//                the incorrect username is not saved within the session
+//                 */
+//                System.out.println("Username is not correct!");
+//                response.setViewName("redirect:/login"); //--displays login in the url instead of loginSubmit
+//                //response.setViewName("login/login") -- this routed to the loginSubmit method
+//                //which gave the view of the loginSubmit in the url, but showed the login page.
+//            }return response;
+////           }
 
     @RequestMapping(value = "/success", method = RequestMethod.GET)
     public ModelAndView success(HttpSession session) throws Exception {

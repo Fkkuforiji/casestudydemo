@@ -1,5 +1,10 @@
 package perscholas.Form;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class LoginBean {
 //place LoginBean into the LoginSubmit method to get and set the username and password inputs
     //    THIS METHOD OF GETTING AND SETTING PARAMETER INPUTS CAN REPLACE >> (HttpServletRequest request, @RequestParam String username, @RequestParam String password)
