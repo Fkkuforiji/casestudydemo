@@ -15,10 +15,10 @@
     My url is named loginSubmit and so is my jsp file, but the action url here is pointed towards the url, NOT the jsp page name
     ex. if my loginSubmit jsp was named success, I would still route the using the loginSubmit -->
 
-    Username <input type="text" name ="usernamefromLoginForm">
+    Username <input type="text" name ="username">
     <br>
     <br>
-    Password <input type="text" name ="passwordfromLoginForm">
+    Password <input type="password" name ="password">
     <br>
     <br>
     <button type ="submit">Submit</button>
