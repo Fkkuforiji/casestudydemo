@@ -5,9 +5,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-import perscholas.Form.LoginBean;
 
 
 import javax.servlet.http.HttpServletRequest;
@@ -50,7 +48,8 @@ public class LoginController {
     private static String SESSION_KEY = "usernameSessionKey";
     private static String SESSION_KEY2 = "passwordSessionKey";
     //class recording January 27th, 3:18:00
-    private static String SESSION_ERROR_MESSAGE = "errorMessageKey"; //01/26/2022 - 4:15:00
+    private static String SESSION_ERROR_MESSAGE = "errorMessageKey"; //01/26/2022 - 4:15:00, video 2: 1:04:50
+    //                                                 ^^ this establishes the variable constants name as a string!
 
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
@@ -67,6 +66,7 @@ public class LoginController {
         } else {
             String errorMessage = (String)session.getAttribute(SESSION_ERROR_MESSAGE);
             response.addObject("errorMessage", errorMessage);
+            //^^ add.object adds the ${errorMessage} to the jsp so it can be displayed
             //adding this object to the page to display
             response.setViewName("login/login");
 

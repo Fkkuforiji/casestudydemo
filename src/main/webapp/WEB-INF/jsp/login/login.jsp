@@ -1,5 +1,5 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-
+<jsp:include page="../include/header.jsp" />
 <html>
 <body>
 
@@ -24,6 +24,8 @@
     <br>
     <button type ="submit">Submit</button>
 <h4 style = "color: red">${errorMessage}</h4>
+        <!--errorMessage is the add Object attribute name in LoginController in the login method-->
 </form>
 </body>
+<jsp:include page="../include/footer.jsp" />
 </html>

@@ -1,6 +1,7 @@
-<%--how to link css to html???--%>
-<html>
-<body>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+
+<jsp:include page="include/header.jsp"/>
+
 <a href="login">Login</a>
 <h1>User Registration</h1>
 <form method ="GET" action="/indexSubmit">
@@ -21,9 +22,9 @@
 <button type ="submit">Submit</button>
 
 </form>
-</body>
+<jsp:include page="include/footer.jsp"/>
 
-</html>
+
 <%--<h1>Register</h1>--%>
 <%--<form method ="get" action ="/indexSubmit" name = "Register">--%>
 <%--    Email <input type ="email" name ="email address">--%>
