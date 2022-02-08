@@ -5,6 +5,7 @@ import lombok.Setter;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import org.hibernate.validator.constraints.Length;
+import perscholas.validation.EmailUnique;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
@@ -21,6 +22,7 @@ public class RegisterBean {
     @Pattern(regexp = "^.+@.+$", message = "Invalid email format")
     //^^ requires an @ sign. Changing the input type to "email" in the register
     // jsp also creates this restraint for force include an @ sign
+    @EmailUnique(message ="Email must be unique")
     private String email;
 
     @Length(min = 3, max = 10, message = "First Name must be between 3 and 10 characters in length!")
