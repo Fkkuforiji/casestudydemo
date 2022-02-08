@@ -20,7 +20,7 @@ public class RegistrationController {
         response.setViewName("registration/register");
 
         RegisterBean form = new RegisterBean();
-        response.addObject("form", form);
+        response.addObject("formBean", form);
 
         return response;
     }
@@ -35,12 +35,15 @@ public class RegistrationController {
 
         if (errors.hasErrors()) {
             for (FieldError error : errors.getFieldErrors()) {
+                form.getErrorMessages().add(error.getDefaultMessage() ); //--January 31st 40:00  3rd recording, adding all applicable error messages
+                // to the page instead of only appearing in the console. add object here and apply to register.jsp with $ {}
                 System.out.println("error field = " + error.getField() + "message = " + error.getDefaultMessage());
+                response.addObject("form", form);
             }
         } else {
                 //if there are not errors on the registration form, then the page should redirect to the login page.
                 //this is where the new user is saved in user regristration table in the database
-                response.addObject("form", form); //--January 31st, 18:04 3rd recording, use ${} to add the objects to the register.jsp
+               //--January 31st, 18:04 3rd recording, use ${} to add the objects to the register.jsp
             response.setViewName("redirect:/login");
             }
 
