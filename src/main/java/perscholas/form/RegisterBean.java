@@ -35,8 +35,10 @@ public class RegisterBean {
     @Max(value = 5, message = "Age cannot be older than 5")
     private Integer age;
 
-    private String confirmPassword;
+   //to use the confirmPassword, lookon Eric's github at the twofield are equal class and interface
     private String password;
+    private String confirmPassword;
+
 
     private List<String> errorMessages = new ArrayList<>();
     @Override
